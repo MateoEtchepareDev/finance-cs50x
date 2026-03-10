@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block main %}
+    <h2>total money: {{totalCash}}</h2>
+    <table>
+        <tr>
+            <th>symbol</th> <!-- symbol from holdings -->
+            <th>amount</th>
+            <th>price</th> <!-- amount from holdings -->
+            <th>operation</th> <!-- lookup function with symbol from holdings -->
+            <th>total in usd</th> <!-- simple operation between price and holdings -->
+            <th>date</th>
+        </tr>
+        {% for row in data %}
+        <tr>
+            <td>{{row["symbol"]}}</td>
+            <td>{{row["amount"]}}</td>
+            <td>{{"%.2f"|format(row["price"])}}</td>
+            <td>{{row["transactionType"]}}</td>
+            <td>{{(row["amount"] * row["price"])}}</td>
+            <td>{{row["transactionTS"]}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

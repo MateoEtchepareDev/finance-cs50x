@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy Stocks
+{% endblock %}
+
+{% block main %}
+    <form action="/sell" method="post">
+        <div class="mb-3">
+            <label for="selectSymbol" class="form-control mx-auto w-auto">select your stock to sell</label>
+            <select name="symbol" id="selectSymbol">
+                {% for symbol in holdings %}
+                    {% if symbol["amount"]>0 %}
+                        <option value="{{symbol['symbol']}}">{{symbol['symbol']}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <input class="form-control mx-auto w-auto" name="shares" placeholder="enter amount" type="float">
+        </div>
+        <button class="btn btn-primary" type="submit">Sell</button>
+    </form>
+    <table>
+        <tr>
+            <th>symbol</th>
+            <th>amount</th>
+        </tr>
+
+        {% for item in holdings %}
+            {% if item["amount"]>0 %}
+            <tr>
+                <td>{{item["symbol"]}}</td>
+                <td>{{item["amount"]}}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+
+    </table>
+{% endblock %}

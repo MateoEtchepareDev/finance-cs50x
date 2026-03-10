@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    This is the price of the stock that you searched for!
+{% endblock %}
+
+{% block main %}
+    <p>A share of {{name}} ({{symbol}}) costs {{"%.2f"|format(price)}}.</p>
+{% endblock %}
